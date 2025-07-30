@@ -92,7 +92,7 @@ def train_and_evaluate(optimizer_name, num_epochs, target_acc, train_loader, val
         running_loss = 0.0
         correct, total = 0, 0
 
-        for images, labels in trainloader:
+        for images, labels in train_loader:
             images, labels = images.to(device), labels.to(device)
             optimizer.zero_grad()
 
