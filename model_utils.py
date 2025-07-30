@@ -132,7 +132,7 @@ def train_and_evaluate(optimizer_name, num_epochs, target_acc, train_loader, val
     model.eval()
     test_loss, correct, total = 0.0, 0, 0
     with torch.no_grad():
-        for images, labels in testloader:
+        for images, labels in val_loader:
             images, labels = images.to(device), labels.to(device)
             outputs = model(images)
             loss = criterion(outputs, labels)
