@@ -25,12 +25,12 @@ To investigate and compare the training speed, convergence behavior, and final a
 
 | Model (Opt)          | Time (s) | Epochs to 70% | Final Accuracy | Final Loss | Loss Std (last 5) |
 |----------------------|----------|----------------|----------------|------------|-------------------|
-| SimpleCNN (Adam)     | 439.9    | 21             | 74.26%         | 0.7892     | 0.0161            |
-| SimpleCNN (SGD)      | 378.6    | 8              | 74.91%         | 0.8662     | 0.0183            |
-| SimpleCNN (Lion)     | 387.4    | 6              | 74.17%         | 0.9438     | 0.0124            |
-| ResNet18 (Adam)      | 691.0    | 2              | 84.02%         | 0.8934     | 0.0047            |
-| ResNet18 (SGD)       | 579.5    | 3              | 79.81%         | 1.0590     | 0.0000            |
-| ResNet18 (Lion)      | 642.3    | 2              | 83.73%         | 0.9086     | 0.0015            |
+| SimpleCNN (Adam)     | 439.3    | 13             | 74.97%         | 0.7846     | 0.0161            |
+| SimpleCNN (SGD)      | 384.3    | 9              | 75.71%         | 0.8263     | 0.0217            |
+| SimpleCNN (Lion)     | 387.0    | 7              | 74.44%         | 0.9145     | 0.0102            |
+| ResNet18 (Adam)      | 700.3    | 2              | 83.94%         | 0.9291     | 0.0062            |
+| ResNet18 (SGD)       | 586.1    | 3              | 80.66%         | 1.0176     | 0.0000            |
+| ResNet18 (Lion)      | 638.5    | 2              | 83.56%         | 0.9310     | 0.0022            |
 
 ## 🔍 Observations
 
