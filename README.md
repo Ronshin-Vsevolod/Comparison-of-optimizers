@@ -34,6 +34,6 @@ To investigate and compare the training speed, convergence behavior, and final a
 
 ## 🔍 Observations
 
-**SGD** is the best choice if the goal is high final accuracy. It is especially effective on small models if there is time for training. It is sensitive to the learning rate, but with the right settings, it gives excellent results.
-**Adam** is a good choice for complex models and situations where you need to quickly achieve acceptable quality. It is especially useful when the number of epochs is limited or when fast initial training is required.
-**Lion** demonstrates good stability and fast convergence on simple architectures. In such conditions, it can outperform Adam in terms of speed and resource efficiency. However, its advantages are reduced on more complex models.
+- **SGD** is the best choice if the goal is high final accuracy. It is especially effective on small models if there is time for training. It is sensitive to the learning rate, but with the right settings, it gives excellent results.
+- **Adam** is a good choice for complex models and situations where you need to quickly achieve acceptable quality. It is especially useful when the number of epochs is limited or when fast initial training is required.
+- **Lion** demonstrates good stability and fast convergence on simple architectures. In such conditions, it can outperform Adam in terms of speed and resource efficiency. However, its advantages are reduced on more complex models.
