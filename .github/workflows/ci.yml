@@ -22,7 +22,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest
-
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch torchvision lion-pytorch matplotlib pandas
+    
     - name: Run Pytest
       run: |
         PYTHONPATH=. pytest tests/
