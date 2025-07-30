@@ -27,7 +27,7 @@ jobs:
 
     - name: Lint with ruff
       run: |
-        - run: ruff check .
+        ruff check .
 
     - name: Run tests
       run: |
