@@ -21,7 +21,7 @@ flake8 = "7.1.0"
 mypy = ">=1.9.0"
 black = ">=25.9.0"
 pre-commit = ">=4.3.0"
-tomli = "*"
+tomli = "2.0.1"
 
 [tool.black]
 line-length = 99

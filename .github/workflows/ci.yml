@@ -67,6 +67,8 @@ jobs:
         grep -A 3 "\[tool.flake8\]" pyproject.toml || echo "[tool.flake8] not found"
         echo "Flake8 and dependencies versions:"
         poetry run pip show flake8 pycodestyle pyflakes tomli
+        echo "Checking pyproject.toml encoding:"
+        file pyproject.toml
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
