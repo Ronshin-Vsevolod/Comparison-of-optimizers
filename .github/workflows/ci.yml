@@ -24,6 +24,7 @@ jobs:
         virtualenvs-create: true
         virtualenvs-in-project: true
         installer-parallel: true
+        version: 1.8.3
 
     - name: Cache Poetry dependencies
       uses: actions/cache@v4
@@ -52,12 +53,7 @@ jobs:
         # Restore original pyproject.toml
         mv pyproject.toml.bak pyproject.toml
 
-    - name: Debug
-      run: |
-        cat pyproject.toml
-        grep -A 3 "\[tool.flake8\]" pyproject.toml || echo "[tool.flake8] not found"
-        poetry run pip show flake8
-        poetry run pip show tomli
+
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
