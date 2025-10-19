@@ -16,7 +16,7 @@ pyyaml = ">=6.0.1"
 omegaconf = ">=2.3.0"
 types-PyYAML = ">=6.0.12"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 flake8 = ">=7.0.0"
 mypy = ">=1.9.0"
 black = ">=25.9.0"
