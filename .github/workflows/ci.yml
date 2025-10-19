@@ -39,7 +39,7 @@ jobs:
         cp pyproject.toml pyproject.toml.bak
         # Create pyproject-ci.toml with CPU source
         cp pyproject.toml pyproject-ci.toml
-        echo '[tool.poetry.source]' >> pyproject-ci.toml
+        echo '[[tool.poetry.source]]' >> pyproject-ci.toml
         echo 'name = "pytorch-cpu"' >> pyproject-ci.toml
         echo 'url = "https://download.pytorch.org/whl/cpu"' >> pyproject-ci.toml
         echo 'priority = "explicit"' >> pyproject-ci.toml
