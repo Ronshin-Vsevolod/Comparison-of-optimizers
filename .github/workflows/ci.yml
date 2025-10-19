@@ -52,6 +52,9 @@ jobs:
         poetry --no-ansi install --with dev --no-root --no-interaction
         # Restore original pyproject.toml
         mv pyproject.toml.bak pyproject.toml
+        # Sync poetry-ci.lock with restored pyproject.toml
+        cp poetry-ci.lock poetry.lock
+        poetry --no-ansi lock --no-update
 
     - name: Validate pyproject.toml
       run: poetry check
