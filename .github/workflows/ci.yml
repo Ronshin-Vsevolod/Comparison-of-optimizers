@@ -35,18 +35,22 @@ jobs:
 
     - name: Install dependencies
       run: |
-        # Create temporary pyproject.toml with CPU source
+        # Save original pyproject.toml
+        cp pyproject.toml pyproject.toml.bak
+        # Create pyproject-ci.toml with CPU source
         cp pyproject.toml pyproject-ci.toml
         echo '[tool.poetry.source]' >> pyproject-ci.toml
         echo 'name = "pytorch-cpu"' >> pyproject-ci.toml
         echo 'url = "https://download.pytorch.org/whl/cpu"' >> pyproject-ci.toml
         echo 'priority = "explicit"' >> pyproject-ci.toml
-        # Use temporary pyproject.toml for CPU dependencies
+        # Use pyproject-ci.toml for CPU dependencies
+        mv pyproject-ci.toml pyproject.toml
         poetry --no-ansi config virtualenvs.path .venv
-        poetry --no-ansi lock --config pyproject-ci.toml
+        poetry --no-ansi lock
         mv poetry.lock poetry-ci.lock
-        poetry --no-ansi install --with dev --no-root --no-interaction --config pyproject-ci.toml
-        rm pyproject-ci.toml
+        poetry --no-ansi install --with dev --no-root --no-interaction
+        # Restore original pyproject.toml
+        mv pyproject.toml.bak pyproject.toml
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
