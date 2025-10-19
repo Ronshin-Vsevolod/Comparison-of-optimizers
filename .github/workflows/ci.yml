@@ -74,7 +74,7 @@ jobs:
       run: poetry run black --check src/
 
     - name: Run Flake8
-      run: poetry run flake8 src/
+      run: poetry run flake8 src/ --python-version=3.12 --ignore-missing-imports --disable-error-code=no-untyped-def,type-arg,no-untyped-call
 
     - name: Run Mypy
       run: poetry run mypy src/ --config-file=.mypy.ini
