@@ -2,12 +2,12 @@ name: Code Quality and Sanity Check
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
-  linting_and_types:
+  ci:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -18,60 +18,38 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Cache pip
-      uses: actions/cache@v3
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml', 'poetry.lock') }}-v2
-        restore-keys: ${{ runner.os }}-pip-
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+
+    - name: Cache Poetry dependencies
+      uses: actions/cache@v4
+      with:
+        path: .venv
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-poetry-
 
     - name: Install dependencies
       run: |
-        pip install poetry
-        poetry config virtualenvs.create false
-        poetry install --extras dev
-      env:
-        PIP_INDEX_URL: https://download.pytorch.org/whl/cpu
+        poetry source add pytorch-cpu https://download.pytorch.org/whl/cpu
+        poetry install --extras dev --no-interaction
 
     - name: Run Black (Check only)
-      run: black --check src/
+      run: poetry run black --check src/
 
     - name: Run Flake8
-      run: flake8 src/
+      run: poetry run flake8 src/
 
     - name: Run Mypy
-      run: mypy src/
-
-  sanity_check:
-    runs-on: ubuntu-latest
-    needs: linting_and_types
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-
-    - name: Cache pip
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-sanity-${{ hashFiles('requirements.txt') }}
-        restore-keys: ${{ runner.os }}-pip-sanity-
-
-    - name: Install core dependencies
-      run: |
-        pip install poetry
-        poetry config virtualenvs.create false
-        poetry install
-      env:
-        PIP_INDEX_URL: https://download.pytorch.org/whl/cpu
+      run: poetry run mypy src/
 
     - name: Run Minimal Functional Test
       run: >-
-        python -c "import torch;
+        poetry run python -c "import torch;
         from src.data_loaders import get_dataloaders;
         from src.models.arch import SimpleCNN, init_resnet18;
         from src.optimization.optimizers import init_optimizer;

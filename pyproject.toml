@@ -1,13 +1,27 @@
-[project]
+[tool.poetry]
 name = "comparison-of-optimizers"
 version = "0.1.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
 python = ">=3.12,<3.13"
-package-mode = false
-dependencies = ["torch>=2.2.0", "torchvision>=0.17.0", "lion-pytorch>=0.1.0", "matplotlib>=3.8.0", "pandas>=2.2.0", "numpy>=1.26.0", "pyyaml>=6.0.1", "omegaconf>=2.3.0", "types-PyYAML>=6.0.12"]
+torch = ">=2.2.0"
+torchvision = ">=0.17.0"
+lion-pytorch = ">=0.1.0"
+matplotlib = ">=3.8.0"
+pandas = ">=2.2.0"
+numpy = ">=1.26.0"
+pyyaml = ">=6.0.1"
+omegaconf = ">=2.3.0"
+types-PyYAML = ">=6.0.12"
 
-
-[project.optional-dependencies]
-dev = ["flake8>=7.0.0", "mypy>=1.9.0", "black>=25.9.0", "pre-commit>=4.3.0", "tomli"]
+[tool.poetry.dev-dependencies]
+flake8 = ">=7.0.0"
+mypy = ">=1.9.0"
+black = ">=25.9.0"
+pre-commit = ">=4.3.0"
+tomli = "*"
 
 [tool.black]
 line-length = 99
@@ -25,4 +39,4 @@ module = ["omegaconf.*"]
 
 [tool.flake8]
 max-line-length = 99
-extend-ignore = "E203, W503"
+extend-ignore = ["E203", "W503"]
