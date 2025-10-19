@@ -36,7 +36,7 @@ jobs:
     - name: Install dependencies
       run: |
         poetry source add --priority=supplemental pytorch-cpu https://download.pytorch.org/whl/cpu
-        poetry install --with dev --no-interaction
+        poetry install --with dev --no-root --no-interaction
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
