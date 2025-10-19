@@ -56,7 +56,7 @@ jobs:
       run: poetry run black --check src/
 
     - name: Run Flake8
-      run: poetry run flake8 src/
+      run: poetry run flake8 src/ --config=pyproject.toml
 
     - name: Run Mypy
       run: poetry run mypy src/
