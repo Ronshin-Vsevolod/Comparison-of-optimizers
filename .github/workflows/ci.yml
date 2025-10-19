@@ -38,6 +38,10 @@ jobs:
         poetry source add --priority=supplemental pytorch-cpu https://download.pytorch.org/whl/cpu
         poetry install --with dev --no-root --no-interaction
 
+    - name: Check Flake8 configuration
+      run: poetry run flake8 --show-source --config=pyproject.toml
+      continue-on-error: true
+      
     - name: Run Black (Check only)
       run: poetry run black --check src/
 
