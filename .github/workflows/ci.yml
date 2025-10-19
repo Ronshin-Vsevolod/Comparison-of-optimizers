@@ -53,13 +53,23 @@ jobs:
         # Restore original pyproject.toml
         mv pyproject.toml.bak pyproject.toml
 
+    - name: Validate pyproject.toml
+      run: poetry check
 
+    - name: Debug
+      run: |
+        echo "Contents of pyproject.toml:"
+        cat pyproject.toml
+        echo "Checking if [tool.flake8] exists:"
+        grep -A 3 "\[tool.flake8\]" pyproject.toml || echo "[tool.flake8] not found"
+        echo "Flake8 and dependencies versions:"
+        poetry run pip show flake8 pycodestyle pyflakes tomli
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
 
     - name: Run Flake8
-      run: poetry run flake8 src/ --config=pyproject.toml
+      run: poetry run flake8 src/
 
     - name: Run Mypy
       run: poetry run mypy src/
