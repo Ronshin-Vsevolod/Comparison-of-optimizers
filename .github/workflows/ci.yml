@@ -74,7 +74,7 @@ jobs:
       run: poetry run black --check src/
 
     - name: Run Flake8
-      run: poetry run flake8 src/ --config-file=.flake8
+      run: poetry run flake8 src/
 
     - name: Run Mypy
       run: poetry run mypy src/ --config-file=.mypy.ini
