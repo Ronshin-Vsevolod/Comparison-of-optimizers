@@ -1,0 +1,7 @@
+device: cuda
+seed: 42
+num_workers: 4
+batch_size: 128
+num_epochs: 30
+target_acc: 70.0
+use_amp: True

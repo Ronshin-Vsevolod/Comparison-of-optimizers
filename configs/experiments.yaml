@@ -1,0 +1,35 @@
+simplecnn_adam:
+  model_name: simplecnn
+  optimizer_name: adam
+  lr: 0.001
+
+simplecnn_sgd:
+  model_name: simplecnn
+  optimizer_name: sgd
+  lr: 0.01
+  momentum: 0.9
+
+simplecnn_lion:
+  model_name: simplecnn
+  optimizer_name: lion
+  lr: 1e-4
+  betas: [0.9, 0.99]
+  weight_decay: 0.0
+
+resnet18_adam:
+  model_name: resnet18
+  optimizer_name: adam
+  lr: 0.001
+
+resnet18_sgd:
+  model_name: resnet18
+  optimizer_name: sgd
+  lr: 0.01
+  momentum: 0.9
+
+resnet18_lion:
+  model_name: resnet18
+  optimizer_name: lion
+  lr: 1e-4
+  betas: [0.9, 0.99]
+  weight_decay: 0.0

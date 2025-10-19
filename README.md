@@ -1,49 +1,108 @@
-# Optimizer Comparison on CIFAR-10: Adam, SGD, and Lion
+# Comparison of Optimizers
 
-This project explores the performance of three popular optimizers — **Adam**, **SGD**, and **Lion** — on image classification tasks using the CIFAR-10 dataset. Two model architectures were evaluated: a custom lightweight CNN (*SimpleCNN*) and a standard deep convolutional network (*ResNet18*).
+This project compares deep learning optimizers using PyTorch and the Lion optimizer. It runs on a local machine with GPU (CUDA) or in Google Colab.
 
-## 🎯 Project Goal
+## Prerequisites
 
-To investigate and compare the training speed, convergence behavior, and final accuracy of Adam, SGD, and Lion when applied to different neural network architectures.
+- **Python**: 3.12.3
+- **Poetry**: 1.8.2
+- **OS**: Linux (tested on Ubuntu with NVIDIA GPU and CUDA 12.8)
+- **Optional for development**: `pre-commit`, `black`, `flake8`, `mypy`
 
-## 🧪 Experiment Setup
+## Setup Instructions (Local)
 
-- **Dataset**: CIFAR-10 (50k training, 10k test images)
-- **Architectures**:
-  - `SimpleCNN`: A custom shallow CNN with ~1.25M parameters.
-  - `ResNet18`: A standard residual network, used *without pretraining*.
-- **Optimizers**:
-  - Adam (`lr=0.001`)
-  - SGD + momentum (`lr=0.05`)
-  - Lion (`lr=1e-4`)
-- **Training duration**: 30 epochs for each optimizer/architecture combination
-- **Acceleration**:
-  - Mixed precision training (`torch.amp`)
-  - Graph-mode compilation (`torch.compile`)
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd Comparison-of-optimizers
+```
 
-## 📈 Key Results
+### 2. Install Poetry
+```bash
+pip install poetry==1.8.2
+poetry --version
+```
 
-| Model (Opt)          | Time (s) | Epochs to 70% | Final Accuracy | Final Loss | Loss Std (last 5) |
-|----------------------|----------|----------------|----------------|------------|-------------------|
-| SimpleCNN (Adam)     | 439.3    | 13             | 74.97%         | 0.7846     | 0.0161            |
-| SimpleCNN (SGD)      | 384.3    | 9              | 75.71%         | 0.8263     | 0.0217            |
-| SimpleCNN (Lion)     | 387.0    | 7              | 74.44%         | 0.9145     | 0.0102            |
-| ResNet18 (Adam)      | 700.3    | 2              | 83.94%         | 0.9291     | 0.0062            |
-| ResNet18 (SGD)       | 586.1    | 3              | 80.66%         | 1.0176     | 0.0000            |
-| ResNet18 (Lion)      | 638.5    | 2              | 83.56%         | 0.9310     | 0.0022            |
+### 3. Set Up Virtual Environment
+```bash
+poetry env use python3.12
+source $(poetry env info --path)/bin/activate
+```
 
-## 🔍 Observations
+### 4. Install Core Dependencies
+```bash
+poetry install --no-root
+```
 
-- **SGD** is the best choice if the goal is high final accuracy. It is especially effective on small models if there is time for training. It is sensitive to the learning rate, but with the right settings, it gives excellent results.
-- **Adam** is a good choice for complex models and situations where you need to quickly achieve acceptable quality. It is especially useful when the number of epochs is limited or when fast initial training is required.
-- **Lion** demonstrates good stability and fast convergence on simple architectures. In such conditions, it can outperform Adam in terms of speed and resource efficiency. However, its advantages are reduced on more complex models.
+### 5. Install Development Dependencies
+```bash
+pip install flake8>=7.0.0 mypy>=1.9.0 black>=24.3.0 pre-commit>=3.7.0
+```
 
-## Requierements
+### 6. Verify Dependencies
+```bash
+pip list | grep -E "torch|torchvision|lion-pytorch|matplotlib|pandas|numpy|pyyaml|omegaconf|flake8|mypy|black|pre-commit"
+```
+Expected output:
+```
+black                    25.9.0 (or newer)
+flake8                   7.3.0 (or newer)
+lion-pytorch             0.1.0 (or newer)
+matplotlib               3.8.0 (or newer)
+mypy                     1.18.2 (or newer)
+numpy                    1.26.0 (or newer)
+omegaconf                2.3.0 (or newer)
+pandas                   2.2.0 (or newer)
+pre-commit               4.3.0 (or newer)
+pyyaml                   6.0.1 (or newer)
+torch                    2.9.0+cu128
+torchvision              0.17.0 (or newer)
+```
 
-- torch
-- torchvision
-- numpy
-- matplotlib
-- pytest
+### 7. Verify GPU Support
+```bash
+python3 -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+```
+Expected output: `2.9.0+cu128 True`
 
+### 8. Run Pre-Commit Checks (Optional)
+For developers:
+```bash
+pre-commit run --all-files
+```
 
+## Running the Program (Local)
+```bash
+cd ~/Workplace/Comparison-of-optimizers
+python3 -m src.run_main
+```
+
+## Setup and Running in Google Colab
+
+### 1. Upload Project Files
+- Upload `src/`, `configs/`, and `requirements.txt` to Google Colab.
+
+### 2. Enable GPU
+- Go to `Runtime > Change runtime type > Hardware accelerator > GPU`.
+
+### 3. Install Dependencies
+```python
+!pip install -r requirements.txt
+```
+
+### 4. Verify GPU Support
+```python
+import torch
+print(torch.__version__, torch.cuda.is_available())
+```
+
+### 5. Run the Program
+```python
+!python3 -m src.run_main
+```
+
+## Development Tools
+- Format code: `black src/`
+- Lint code: `flake8 src/`
+- Type check: `mypy src/`
+- Run all checks: `pre-commit run --all-files`
