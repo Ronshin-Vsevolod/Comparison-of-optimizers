@@ -29,9 +29,9 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .venv
-        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry-ci.lock') }}
+        key: ${{ runner.os }}-poetry-ci-${{ hashFiles('poetry-ci.lock') }}
         restore-keys: |
-          ${{ runner.os }}-poetry-
+          ${{ runner.os }}-poetry-ci-
 
     - name: Install dependencies
       run: |
@@ -43,7 +43,7 @@ jobs:
         echo 'priority = "explicit"' >> pyproject-ci.toml
         # Use temporary pyproject.toml for CPU dependencies
         poetry --no-ansi config virtualenvs.path .venv
-        poetry --no-ansi lock --no-update --config pyproject-ci.toml
+        poetry --no-ansi lock --config pyproject-ci.toml
         mv poetry.lock poetry-ci.lock
         poetry --no-ansi install --with dev --no-root --no-interaction --config pyproject-ci.toml
         rm pyproject-ci.toml
