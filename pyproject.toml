@@ -18,7 +18,7 @@ types-PyYAML = ">=6.0.12"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "7.1.0"
-mypy = ">=1.9.0"
+mypy = "1.9.0"
 black = ">=25.9.0"
 pre-commit = ">=4.3.0"
 tomli = "2.0.1"
@@ -36,8 +36,3 @@ disable_error_code = ["no-untyped-def", "type-arg", "no-untyped-call"]
 
 [[tool.mypy.overrides]]
 module = ["omegaconf.*"]
-
-[tool.flake8]
-max-line-length = 99
-extend-ignore = ["E203", "W503"]
-exclude = [".venv"]
