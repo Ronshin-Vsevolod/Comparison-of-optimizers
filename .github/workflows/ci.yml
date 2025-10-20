@@ -83,7 +83,7 @@ jobs:
 
     - name: Run Minimal Functional Test
       run: >-
-        PYTHONPATH=${PWD}.src poetry run python -c "import torch;
+        PYTHONPATH=${PWD}/src poetry run python -c "import torch;
         from src.data_loaders import get_cifar10_loaders;
         from src.models.arch import SimpleCNN, get_model;
         from src.optimization.optimizers import get_optimizer_and_scheduler;
