@@ -1,27 +1,28 @@
 import torch.nn as nn
-import torch.optim as optim
-from torch.optim.lr_scheduler import _LRScheduler
+from torch.optim import Optimizer, SGD, Adam
+from torch.optim.lr_scheduler import _LRScheduler, CosineAnnealingLR
 from lion_pytorch import Lion
-from typing import Tuple, Dict, Any, Optional
+from typing import Tuple, Dict, Any, Optional, cast
 
 
 def get_optimizer_and_scheduler(
     model: nn.Module, config: Dict[str, Any], num_epochs: int
-) -> Tuple[optim.Optimizer, Optional[_LRScheduler]]:
+) -> Tuple[Optimizer, Optional[_LRScheduler]]:
     """Инициализирует оптимизатор и шедулер на основе конфигурации."""
     optimizer_name = config["optimizer_name"]
     lr = config["lr"]
-    scheduler = None
+    scheduler: Optional[_LRScheduler] = None
 
     params = model.parameters()
+    optimizer: Optimizer
 
     if optimizer_name == "adam":
-        optimizer = optim.Adam(params, lr=lr)
+        optimizer = Adam(params, lr=lr)
 
     elif optimizer_name == "sgd":
         momentum = config.get("momentum", 0.9)
-        optimizer = optim.SGD(params, lr=lr, momentum=momentum)
-        scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs)
+        optimizer = SGD(params, lr=lr, momentum=momentum)
+        scheduler = cast(Optional[_LRScheduler], CosineAnnealingLR(optimizer, T_max=num_epochs))
 
     elif optimizer_name == "lion":
         betas = config.get("betas", (0.9, 0.99))

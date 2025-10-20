@@ -24,4 +24,8 @@ repos:
     rev: v1.18.2
     hooks:
       - id: mypy
-        additional_dependencies: [types-PyYAML]
+        args: [--config-file=./.mypy.ini]
+        additional_dependencies:
+        - torch>=2.2.0
+        - types-PyYAML>=6.0.12
+        - omegaconf>=2.3.0
