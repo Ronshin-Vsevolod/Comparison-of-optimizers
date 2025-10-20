@@ -84,10 +84,14 @@ jobs:
     - name: Run Minimal Functional Test
       run: >-
         poetry run python -c "import torch;
-        from src.data_loaders import get_dataloaders;
-        from src.models.arch import SimpleCNN, init_resnet18;
-        from src.optimization.optimizers import init_optimizer;
+        from src.data_loaders import get_cifar10_loaders;
+        from src.models.arch import SimpleCNN, get_model;
+        from src.optimization.optimizers import get_optimizer_and_scheduler;
+        
         model_cnn = SimpleCNN().to(torch.device('cpu'));
-        model_resnet = init_resnet18(weights=None).to(torch.device('cpu'));
-        adam = init_optimizer(model_cnn.parameters(), 'adam', lr=0.001);
+        model_resnet = get_model(model_name='resnet18', device='cpu');
+        
+        config_adam = {'optimizer_name': 'adam', 'lr': 0.001};
+        adam, _ = get_optimizer_and_scheduler(model_cnn, config_adam, num_epochs=1);
+        
         print('Sanity check: Models and Optimizers initialized successfully.')"
