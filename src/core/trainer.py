@@ -120,7 +120,6 @@ def train_and_evaluate(
             Loss: {test_loss:.4f}, Accuracy: {test_acc:.2f}%"
     )
 
-    # Если не достигли целевой точности, возвращаем общее количество эпох
     epochs_to_target_acc_final = (
         epoch_to_target_acc if epoch_to_target_acc is not None else num_epochs
     )
