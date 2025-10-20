@@ -77,7 +77,7 @@ jobs:
       run: poetry run flake8 src/
 
     - name: Run Mypy
-      run: poetry run mypy src/ --python-version=3.12 --ignore-missing-imports --disable-error-code=no-untyped-def,type-arg,no-untyped-call,assignment,return-value
+      run: poetry run mypy src/ --python-version=3.12 --ignore-missing-imports --disable-error-code=no-untyped-def,type-arg,no-untyped-call
 
     - name: Run Minimal Functional Test
       run: >-
