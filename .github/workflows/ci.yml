@@ -65,12 +65,22 @@ jobs:
         pwd
         echo "List files:"
         ls -la
+        echo "List src/ files:"
+        ls -la src/ || echo "src/ not found"
+        echo "List src/models/ files:"
+        ls -la src/models/ || echo "src/models/ not found"
+        echo "List src/optimization/ files:"
+        ls -la src/optimization/ || echo "src/optimization/ not found"
+        echo "List src/data_loaders/ files:"
+        ls -la src/data_loaders/ || echo "src/data_loaders/ not found"
         echo "Contents of .mypy.ini:"
         cat .mypy.ini || echo ".mypy.ini not found"
         echo "Versions:"
         poetry run pip show mypy torch
         echo "File encodings:"
         file pyproject.toml .mypy.ini
+        echo "PYTHONPATH:"
+        echo $PYTHONPATH
 
     - name: Run Black (Check only)
       run: poetry run black --check src/
@@ -83,7 +93,7 @@ jobs:
 
     - name: Run Minimal Functional Test
       run: >-
-        PYTHONPATH=${PWD}/src poetry run python -c "import torch;
+        PYTHONPATH=${PWD} poetry run python -c "import torch;
         from src.data_loaders import get_cifar10_loaders;
         from src.models.arch import SimpleCNN, get_model;
         from src.optimization.optimizers import get_optimizer_and_scheduler;
