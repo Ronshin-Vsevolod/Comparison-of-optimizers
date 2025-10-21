@@ -1,3 +1,3 @@
-from .optimizers import get_optimizer_and_scheduler
+from .arch import SimpleCNN, get_model
 
-__all__ = ["get_optimizer_and_scheduler"]
+__all__ = ["SimpleCNN", "get_model"]
