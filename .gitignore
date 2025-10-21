@@ -24,22 +24,17 @@ share/python-wheels/
 MANIFEST
 
 # Virtual Enviroment (venv, conda, poetry)
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 .venv/
-.env/
-.conda/
-condaenv/
+env/
+ENV/
+venv.bak/
+env.bak/
 
 # PyTorch, DL
 *.pth
 *.pt
 *.ckpt
 *.bin
-models/
 checkpoints/
 tensorboard/
 wandb/
@@ -49,18 +44,14 @@ runs/
 
 # Pre-commit cache
 .pre-commit-cache/
-.pre-commit-config.yaml.bak  # Если бэкапы
 
 # Package managers (pip, poetry, etc.)
 pip-log.txt
 pip-delete-this-directory.txt
-pipfile.lock
-poetry.lock
-pyproject.toml.bak
+poetry.lock.bak
 
 # Jupyter Notebooks checkpoints
 .ipynb_checkpoints/
-*.ipynb_checkouts
 
 # IDE, editors
 .idea/
@@ -82,7 +73,7 @@ Thumbs.db
 *.log
 *.tmp
 *.bak
-*.swp
+=*.*.*
 
 # GitHub Actions
 .github/workflows/*.yml.bak
